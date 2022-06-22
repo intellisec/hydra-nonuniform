@@ -6,5 +6,3 @@ We fork the code from [Hydra](https://github.com/inspire-group/hydra) and extend
 2. Extend pruning with channel granularity in `./models/layers.py`.
 3. Add reader function `parse_prune_stg` in `./utils/logging.py` to fetch a strategy from `strategy.json`.
 4. Apply non-uniform compression strategy via the function `set_prune_rate_model` in `./utils/model.py`.
-# hydra-nonuniform
-# hydra-nonuniform
