@@ -1,0 +1,66 @@
+# ->->->->-> Primary <-<-<-<-<-
+arch: "wrn_28_4"
+exp_name: "svhn_ch05_0"
+result_dir: "./trained_models/wrn_284"
+num_classes: 10
+layer_type: "subnet"
+init_type: "kaiming_normal"
+
+
+# ->->->->-> Pruning <-<-<-<-<-
+k: 0.5
+
+# ->->->->-> Train <-<-<-<-<-
+trainer: "adv"
+epochs: 20
+optimizer: "sgd"
+lr: 0.1
+# fine-tuning learning rate : lr = 0.01
+# pruning & pretrain learning rate: lr = 0.1
+# pruning steps: 20
+# fine-tuning steps: 100
+lr_schedule: "cosine"
+wd: 0.0001
+momentum: 0.9
+#warmup
+warmup_epochs: 10
+#warmup_loss: "fgsm"
+warmup_lr: 0.1
+
+
+# ->->->->-> Eval <-<-<-<-<-
+val_method: adv
+
+
+# ->->->->-> Init <-<-<-<-<-
+#scaled_score_init: true
+source_net: "Pretrain-Models/torch-models/wrn284_pretrain_svhn.pth.tar"
+save_dense: true
+
+
+# ->->->->-> Dataset <-<-<-<-<-
+dataset: SVHN
+batch_size: 256
+test_batch_size: 256
+data_dir: "data"
+data_fraction: 1.0
+
+# ->->->->-> Semi-supervised training <-<-<-<-<-
+semisup_data: "tinyimages"
+semisup_fraction: 1.0
+
+
+# ->->->->-> Adv <-<-<-<-<-
+epsilon: 0.031
+num_steps: 10
+step_size: 0.0078
+clip_min: 0
+clip_max: 1
+distance: "l_inf"
+beta: 6.0
+
+
+# ->->->->-> Misc <-<-<-<-<-
+gpu: "0"
+seed: 1234
+print_freq: 10
